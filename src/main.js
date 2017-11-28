@@ -2,32 +2,22 @@ import 'pixi'
 import 'p2'
 import Phaser from 'phaser'
 
+import BootState from './states/Boot'
+import SplashState from './states/Splash'
+import GameState from './states/Game'
+
 import config from './config'
 
 class Game extends Phaser.Game {
     constructor() {
-        super( config.gameWidth, config.gameHeight, Phaser.AUTO, 'content', null )
+        super( config.gameWidth, config.gameHeight, Phaser.AUTO, 'content', null );
+
+        this.state.add( 'Boot', BootState );
+        this.state.add( 'Splash', SplashState );
         this.state.add( 'Game', GameState );
-        this.state.start( 'Game' );
+
+        this.state.start( 'Boot' );
     }
 }
 
-class GameState extends Phaser.State {
-    init() {
-        console.log( `init` );
-    }
-    preload() {
-        console.log( `preload` );
-    }
-    create() {
-        console.log( `create` );
-    }
-    update() {
-        // console.log( `update` );
-    }
-    render() {
-        // console.log( `render` );
-    }
-}
-
-window.game = new Game()
+window.game = new Game();

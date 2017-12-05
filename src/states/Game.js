@@ -3,6 +3,7 @@ import config from '../config.js'
 import { random } from '../utils.js'
 
 import Tile from '../classes/Tile.js'
+import Player from '../classes/Player.js'
 
 export default class extends Phaser.State {
     constructor() {
@@ -15,10 +16,21 @@ export default class extends Phaser.State {
         const max = Math.ceil( config.gameHeight / config.tileSize * 2 );
         for( let i = 0; i < max; i++ )
             this.addTile( this.tiles[ this.tiles.length - 1 ] );
+
+        this.player = new Player( {
+            game: this.game,
+            x: this.world.centerX,
+            y: this.world.centerY,
+            asset: 'player'
+        } );
+        this.game.add.existing( this.player );
+
+        const spacebar = game.input.keyboard.addKey( Phaser.Keyboard.SPACEBAR );
+        spacebar.onDown.add( () => this.player.turn() );
     }
 
     update() {
-        // nothing here!
+        // nothing here yet!
     }
 
     addTile( preceder ) {

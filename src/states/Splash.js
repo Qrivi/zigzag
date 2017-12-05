@@ -1,6 +1,5 @@
 import Phaser from 'phaser'
-
-import { centerGameObjects } from '../utils'
+import { centerGameObjects } from '../utils.js'
 
 export default class extends Phaser.State {
     init() {}
@@ -11,10 +10,9 @@ export default class extends Phaser.State {
         centerGameObjects( [ this.loaderBg, this.loaderBar ] );
 
         this.load.setPreloadSprite( this.loaderBar );
-        //
-        // load your assets
-        //
-        // this.load.image('mushroom', 'assets/images/mushroom2.png')
+
+        // this.load.image('mushroom', 'assets/images/player.png');
+        this.load.spritesheet( 'player', 'assets/images/player.png', 42, 62 );
     }
 
     create() {

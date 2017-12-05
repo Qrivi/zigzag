@@ -3,7 +3,7 @@ import WebFont from 'webfontloader'
 
 export default class extends Phaser.State {
     init() {
-        this.stage.backgroundColor = '#214277';
+        this.stage.backgroundColor = '#DEDEDE';
         this.fontsReady = false;
         this.fontsLoaded = this.fontsLoaded.bind( this );
     }

@@ -1,4 +1,4 @@
-- have player run left or right and up at the same time
+X have player run left or right and up at the same time
 - implement camera and have it follow player
 - remove tiles that are out of view
 - build new tiles ahead

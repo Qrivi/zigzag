@@ -8,14 +8,15 @@ import Player from '../classes/Player.js'
 export default class extends Phaser.State {
     constructor() {
         super();
-        this.tiles = [];
     }
 
     create() {
+        this.tiles = this.game.add.group();
+        this.game.add.existing( this.tiles );
+
         this.addTile();
-        const max = Math.ceil( config.gameHeight / config.tileSize * 2 );
-        for( let i = 0; i < max; i++ )
-            this.addTile( this.tiles[ this.tiles.length - 1 ] );
+        for( let i = 0; i < Math.ceil( config.gameHeight / config.tileSize * 2 ); i++ )
+            this.addTile( this.tiles.getAt( 0 ) );
 
         this.player = new Player( {
             game: this.game,
@@ -46,8 +47,6 @@ export default class extends Phaser.State {
             offset: offset
         } );
 
-        this.tiles.push( tile );
-        this.game.add.existing( tile );
-        this.game.world.sendToBack( tile );
+        this.tiles.addChildAt( tile, 0 );
     }
 }

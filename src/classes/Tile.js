@@ -3,7 +3,7 @@ import Phaser from 'phaser'
 export default class Tile extends Phaser.Graphics {
     constructor( { game, preceder, size, offset } ) {
         if( preceder ) {
-            super( game, preceder.x + offset, preceder.y - size * .5 )
+            super( game, preceder.x + offset, preceder.y - size * .5 );
             this.size = size;
             this.offset = offset;
         } else {
@@ -14,16 +14,10 @@ export default class Tile extends Phaser.Graphics {
 
         this.game = game;
         this.preceder = preceder;
+        this.enableBody = true;
+        this.hitArea = new Phaser.Rectangle( -size, 0, 2 * size, size );
 
-        this.polygon = new Phaser.Polygon( [
-            new Phaser.Point( 0, 0 ),
-            new Phaser.Point( this.size, this.size * .5 ),
-            new Phaser.Point( 0, this.size ),
-            new Phaser.Point( -this.size, this.size * .5 )
-        ] );
-
-        this.hitArea = this.polygon;
-
+        this.anchor.setTo( .5 );
         this.drawSide();
         this.drawSurface();
     }
@@ -49,7 +43,12 @@ export default class Tile extends Phaser.Graphics {
 
     drawSurface() {
         this.beginFill( 0x89C9FA );
-        this.drawPolygon( this.polygon.points );
+        this.drawPolygon( [
+            new Phaser.Point( 0, 0 ),
+            new Phaser.Point( this.size, this.size * .5 ),
+            new Phaser.Point( 0, this.size ),
+            new Phaser.Point( -this.size, this.size * .5 )
+        ] );
         this.endFill();
     }
 }

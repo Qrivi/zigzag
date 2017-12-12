@@ -30,7 +30,7 @@ export default class extends Phaser.State {
         this.game.camera.follow( this.player, Phaser.Camera.FOLLOW_TOPDOWN );
 
         // add controls
-        const spacebar = game.input.keyboard.addKey( Phaser.Keyboard.SPACEBAR );
+        const spacebar = this.game.input.keyboard.addKey( Phaser.Keyboard.SPACEBAR );
         spacebar.onDown.add( () => this.player.turn() );
     }
 
@@ -50,8 +50,6 @@ export default class extends Phaser.State {
                 if( tile.accessible )
                     tileHits += tile.contains( hitPoints );
             } );
-
-            console.log( 'tile hits:', tileHits );
 
             if( tileHits < 2 ) {
                 console.log( 'u r ded bro xD' );

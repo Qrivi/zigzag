@@ -1,5 +1,4 @@
 import Phaser from 'phaser'
-import { random } from '../utils.js'
 
 import Tile from '../classes/Tile.js'
 import Player from '../classes/Player.js'
@@ -15,7 +14,6 @@ export default class extends Phaser.State {
         this.tiles = this.game.add.group();
         this.game.add.existing( this.tiles );
 
-        this.addTile();
         for( let i = 0; i < Math.ceil( this.game.height / this.tileSize * 2 ); i++ )
             this.addTile( this.tiles.getAt( 0 ) );
 
@@ -44,11 +42,15 @@ export default class extends Phaser.State {
     }
 
     addTile( preceder ) {
+        console.log( 'Adding a tile' );
         let offset = this.tileSize;
-        if( preceder && preceder.x >= this.game.width - this.tileSize * 2 )
+
+        if( preceder && preceder < 1 )
+            preceder = false;
+        else if( preceder && preceder.x >= this.game.width - this.tileSize * 2 )
             offset = -this.tileSize;
         else if( preceder && preceder.x >= this.tileSize * 2 )
-            offset *= ( ( Math.round( random( 0, 2 ) ) % 2 ) ? 1 : -1 );
+            offset *= ( ( Math.round( this.game.rnd.integerInRange( 0, 2 ) ) % 2 ) ? 1 : -1 );
 
         let tile = new Tile( {
             game: this.game,
@@ -56,6 +58,8 @@ export default class extends Phaser.State {
             size: this.tileSize,
             offset: offset
         } );
+
+        tile.events.onKilled.addOnce( () => { this.addTile( this.tiles.getAt( 0 ) ); } );
 
         this.tiles.addChildAt( tile, 0 );
     }

@@ -1,5 +1,5 @@
 export default {
-    gameWidth: 640,
+    gameWidth: 1000,
     gameHeight: 900,
     tileSize: 50,
     playerSpeed: 3,

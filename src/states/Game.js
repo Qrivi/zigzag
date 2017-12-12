@@ -27,9 +27,9 @@ export default class extends Phaser.State {
         } );
         this.game.add.existing( this.player );
 
-        this.game.physics.startSystem( Phaser.Physics.ARCADE );
-        this.game.physics.enable( this.tiles );
-        this.game.physics.enable( this.player );
+        //this.game.physics.startSystem( Phaser.Physics.ARCADE );
+        //this.game.physics.enable( this.tiles );
+        //this.game.physics.enable( this.player );
         this.game.camera.follow( this.player, Phaser.Camera.FOLLOW_TOPDOWN );
 
         const spacebar = game.input.keyboard.addKey( Phaser.Keyboard.SPACEBAR );

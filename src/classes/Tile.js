@@ -14,12 +14,15 @@ export default class Tile extends Phaser.Graphics {
 
         this.game = game;
         this.preceder = preceder;
-        this.enableBody = true;
-        this.hitArea = new Phaser.Rectangle( -size, 0, 2 * size, size );
+        this.hitArea = new Phaser.Rectangle( -size, 0, size * 2, size );
 
         this.anchor.setTo( .5 );
         this.drawSide();
         this.drawSurface();
+    }
+
+    getBounds() {
+        return this.hitArea;
     }
 
     update() {

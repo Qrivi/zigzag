@@ -7,7 +7,7 @@ export default class extends Phaser.State {
     constructor() {
         super();
         this.tileSize = 50;
-        this.playerSpeed = 3;
+        this.playerSpeed = 1;
     }
 
     create() {
@@ -26,10 +26,6 @@ export default class extends Phaser.State {
             speed: this.playerSpeed
         } );
         this.game.add.existing( this.player );
-
-        //this.game.physics.startSystem( Phaser.Physics.ARCADE );
-        //this.game.physics.enable( this.tiles );
-        //this.game.physics.enable( this.player );
         this.game.camera.follow( this.player, Phaser.Camera.FOLLOW_TOPDOWN );
 
         const spacebar = game.input.keyboard.addKey( Phaser.Keyboard.SPACEBAR );
@@ -42,7 +38,7 @@ export default class extends Phaser.State {
     }
 
     addTile( preceder ) {
-        console.log( 'Adding a tile' );
+        //console.log( 'Adding a tile' );
         let offset = this.tileSize;
 
         if( preceder && preceder < 1 )
@@ -59,7 +55,9 @@ export default class extends Phaser.State {
             offset: offset
         } );
 
-        tile.events.onKilled.addOnce( () => { this.addTile( this.tiles.getAt( 0 ) ); } );
+        tile.events.onKilled.addOnce( () => {
+            this.addTile( this.tiles.getAt( 0 ) );
+        } );
 
         this.tiles.addChildAt( tile, 0 );
     }

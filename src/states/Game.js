@@ -1,5 +1,4 @@
 import Phaser from 'phaser'
-import config from '../config.js'
 import { random } from '../utils.js'
 
 import Tile from '../classes/Tile.js'
@@ -8,6 +7,8 @@ import Player from '../classes/Player.js'
 export default class extends Phaser.State {
     constructor() {
         super();
+        this.tileSize = 50;
+        this.playerSpeed = 3;
     }
 
     create() {
@@ -15,35 +16,44 @@ export default class extends Phaser.State {
         this.game.add.existing( this.tiles );
 
         this.addTile();
-        for( let i = 0; i < Math.ceil( config.gameHeight / config.tileSize * 2 ); i++ )
+        for( let i = 0; i < Math.ceil( this.game.height / this.tileSize * 2 ); i++ )
             this.addTile( this.tiles.getAt( 0 ) );
 
+        this.startX = this.world.centerX;
+        this.startY = this.world.centerY + 150;
         this.player = new Player( {
             game: this.game,
-            x: this.world.centerX,
-            y: this.world.centerY + 150,
-            asset: 'player'
+            x: this.startX,
+            y: this.startY,
+            speed: this.playerSpeed
         } );
         this.game.add.existing( this.player );
+
+        this.game.physics.startSystem( Phaser.Physics.ARCADE );
+        this.game.physics.enable( this.tiles );
+        this.game.physics.enable( this.player );
+        this.game.camera.follow( this.player, Phaser.Camera.FOLLOW_TOPDOWN );
 
         const spacebar = game.input.keyboard.addKey( Phaser.Keyboard.SPACEBAR );
         spacebar.onDown.add( () => this.player.turn() );
     }
 
-    update() {
-        // nothing here yet!
+    render() {
+        this.game.world.setBounds( 0, 0 + this.player.y - this.startY, this.game.width, this.game.height );
+        this.game.debug.cameraInfo( this.game.camera, 32, 32 );
     }
 
     addTile( preceder ) {
-        let offset = config.tileSize;
-        if( preceder && preceder.x >= config.gameWidth - config.tileSize * 2 )
-            offset = -config.tileSize;
-        else if( preceder && preceder.x >= config.tileSize * 2 )
+        let offset = this.tileSize;
+        if( preceder && preceder.x >= this.game.width - this.tileSize * 2 )
+            offset = -this.tileSize;
+        else if( preceder && preceder.x >= this.tileSize * 2 )
             offset *= ( ( Math.round( random( 0, 2 ) ) % 2 ) ? 1 : -1 );
 
         let tile = new Tile( {
             game: this.game,
             preceder: preceder,
+            size: this.tileSize,
             offset: offset
         } );
 

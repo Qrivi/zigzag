@@ -1,13 +1,13 @@
 {
-    "name": "COD_1718_W_03",
+    "name": "zigzag",
     "version": "1.0.0",
-    "description": "Project Collaborative Development",
+    "description": "It's a game",
     "main": "index.js",
-    "author": "Kristof Dewilde <kristof.dewilde@student.howest.be>, Ruben Perrewé <ruben.perrewe@student.howest.be>",
+    "author": "Kristof Dewilde <kristof.dewilde@student.howest.be>",
     "license": "MIT",
     "scripts": {
         "dev": "webpack",
-        "test": "eslint ./src/**/**.js"
+        "lint": "eslint ./src"
     },
     "devDependencies": {
         "babel-core": "^6.25.0",

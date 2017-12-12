@@ -1,7 +1,0 @@
-X have player run left or right and up at the same time
-- implement camera and have it follow player
-- remove tiles that are out of view
-- build new tiles ahead
-- nap
-- implement Phaser's "alive" to check for overlapping hitAreas Player and Tile
-- implement other states

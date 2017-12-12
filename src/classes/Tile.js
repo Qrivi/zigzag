@@ -28,6 +28,13 @@ export default class Tile extends Phaser.Graphics {
         this.drawSurface();
     }
 
+    update() {
+        if( this.alive && this.y - this.game.camera.y > this.game.height ) {
+            this.kill();
+            this.destroy();
+        }
+    }
+
     drawSide() {
         this.beginFill( 0x6291D4 );
         this.drawPolygon( [

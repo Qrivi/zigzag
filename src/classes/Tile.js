@@ -1,15 +1,14 @@
 import Phaser from 'phaser'
-import config from '../config.js'
 
 export default class Tile extends Phaser.Graphics {
-    constructor( { game, preceder, offset } ) {
+    constructor( { game, preceder, size, offset } ) {
         if( preceder ) {
-            super( game, preceder.x + offset, preceder.y - config.tileSize * .5 )
-            this.size = config.tileSize;
+            super( game, preceder.x + offset, preceder.y - size * .5 )
+            this.size = size;
             this.offset = offset;
         } else {
             super( game, game.width / 2, game.height - 400 );
-            this.size = config.tileSize * 4;
+            this.size = size * 4;
             this.offset = 0;
         }
 

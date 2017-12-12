@@ -1,12 +1,12 @@
 import Phaser from 'phaser'
 
 export default class extends Phaser.Sprite {
-    constructor( { game, x, y, asset } ) {
-        super( game, x, y, asset, 1 );
+    constructor( { game, x, y, speed } ) {
+        super( game, x, y, 'player', 1 );
         this.anchor.setTo( .5 );
         this.scale.setTo( .85 );
 
-        this.velocity = 3;
+        this.speed = speed;
         this.running = false;
 
         this.animations.add( 'default', [ 0 ] );
@@ -17,11 +17,11 @@ export default class extends Phaser.Sprite {
 
     update() {
         if( this.running && this.alive ) {
-            this.y -= this.velocity * .5;
+            this.y -= this.speed * .5;
             if( this.animations.currentAnim.name === 'right' )
-                this.x += this.velocity;
+                this.x += this.speed;
             else if( this.animations.currentAnim.name === 'left' )
-                this.x -= this.velocity;
+                this.x -= this.speed;
         }
     }
 

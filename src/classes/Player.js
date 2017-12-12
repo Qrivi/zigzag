@@ -8,11 +8,16 @@ export default class extends Phaser.Sprite {
 
         this.speed = speed;
         this.running = false;
+        this.hitArea = new Phaser.Rectangle( 0, 50, 42, 12 );
 
         this.animations.add( 'default', [ 0 ] );
         this.animations.add( 'left', [ 1 ] );
         this.animations.add( 'right', [ 2 ] );
         this.animations.play( 'default' );
+    }
+
+    getBounds() {
+        return this.hitArea;
     }
 
     update() {

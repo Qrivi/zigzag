@@ -50,7 +50,7 @@ export default class extends Phaser.State {
         else if( preceder && preceder.x >= this.game.width - this.tileSize * 2 )
             offset = -this.tileSize;
         else if( preceder && preceder.x >= this.tileSize * 2 )
-            offset *= ( ( Math.round( this.game.rnd.integerInRange( 0, 2 ) ) % 2 ) ? 1 : -1 );
+            offset *= ( ( Math.round( this.game.rnd.integerInRange( 0, 1 ) ) % 2 ) ? 1 : -1 );
 
         let tile = new Tile( {
             game: this.game,
